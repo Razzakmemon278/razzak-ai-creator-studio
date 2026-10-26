@@ -1,0 +1,35 @@
+name: Weekly Creator Studio Maintenance
+
+on:
+  schedule:
+    - cron: "30 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health-check:
+    name: Check static site files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f app.js
+          test -f README-CREATOR-STUDIO.md
+
+      - name: Check JavaScript syntax
+        run: node --check app.js
+
+      - name: Check HTML references local assets
+        run: |
+          grep -q 'href="styles.css"' index.html
+          grep -q 'src="app.js"' index.html
+
+      - name: Report maintenance result
+        run: echo "Static site checks passed. Deployment remains automatic on pushes to main.";
