@@ -65,7 +65,7 @@ if (html && toolsHtml && /Prompt builder/.test(html) && /Open ChatGPT/.test(tool
 if (episode) {
   const scenes = [...episode.matchAll(/^### Scene \d{2} \|/gm)];
   if (scenes.length !== 15) fail('Pip episode should contain 15 scenes; found ' + scenes.length);
-  if (!/Target:\s*120 seconds/.test(episode)) fail('Pip episode does not declare the 120-second target');
+  if (!/Target:\*\*\s*120 seconds/.test(episode)) fail('Pip episode does not declare the 120-second target');
   if (!/teal backpack with one yellow star/.test(episode)) fail('Pip continuity anchor is missing');
   if (scenes.length === 15) pass('Pip production pack has 15 scenes for a 120-second episode');
 }
