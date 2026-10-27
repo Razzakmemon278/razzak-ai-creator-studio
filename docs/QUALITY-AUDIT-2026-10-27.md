@@ -21,9 +21,15 @@ The default branch is main. The repository is public and the connected GitHub in
 - content/pip-red-panda-episode-2-minute.md: original 15-scene, 120-second episode plan with a locked character description, narration, caption overlays, edit recipe and release gate.
 - tests/smoke-check.mjs and .github/workflows/quality-check.yml: dependency-free checks for JavaScript syntax, dashboard controls, local resources and the 15-scene production pack.
 
+## Verification results
+
+- GitHub Actions run 40477825139 completed successfully on this branch. It ran both Node syntax checks and the smoke-check script.
+- The recorded smoke-check log confirms unique IDs/local resources in index.html and tools.html, 21 app.js element-ID references matching index.html, the dashboard/tool-directory presence check, and the 15-scene / 120-second Pip production-pack check.
+- The quality workflow did not install third-party packages and did not require network access for its smoke checks.
+
 ## Verification limits
 
-- The smoke-check is designed to run in GitHub Actions on this branch/PR. Its actual pass/fail result must be taken from the Actions run, not assumed.
+- The checks validate static site wiring and the production plan; they do not test rendering inside every Android browser or verify the live Pages deployment.
 - The quality workflow does not render videos, authenticate into social accounts, spend credits, change profiles or publish content.
 - The production document is a script and storyboard; no MP4 is included or claimed.
 - All changes in this proposal are new files. Existing files on main are not deleted, renamed or overwritten.
