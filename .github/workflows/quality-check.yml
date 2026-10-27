@@ -1,0 +1,32 @@
+name: Creator Studio Quality Checks
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate static site and production pack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check dashboard JavaScript syntax
+        run: node --check app.js
+      - name: Check smoke-test JavaScript syntax
+        run: node --check tests/smoke-check.mjs
+      - name: Validate dashboard links, controls and production pack
+        run: node tests/smoke-check.mjs
